@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>复杂贪吃蛇游戏</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/components.css">
+    <link rel="stylesheet" href="styles/animations.css">
+</head>
+<body>
+    <div class="game-container">
+        <!-- 游戏标题 -->
+        <header class="game-header">
+            <h1 class="game-title">🐍 贪吃蛇大作战</h1>
+            <div class="header-controls">
+                <button id="settings-btn" class="btn btn-secondary">⚙️ 设置</button>
+                <button id="help-btn" class="btn btn-secondary">❓ 帮助</button>
+            </div>
+        </header>
+
+        <!-- 游戏菜单 -->
+        <div id="main-menu" class="menu-screen">
+            <div class="menu-content">
+                <h2>选择游戏模式</h2>
+                <div class="menu-buttons">
+                    <button id="classic-mode" class="btn btn-primary">🎮 经典模式</button>
+                    <button id="challenge-mode" class="btn btn-primary">⚡ 挑战模式</button>
+                    <button id="endless-mode" class="btn btn-primary">♾️ 无尽模式</button>
+                </div>
+                <div class="high-scores">
+                    <h3>最高分记录</h3>
+                    <div id="high-score-list" class="score-list">
+                        <!-- 最高分将在这里显示 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 游戏界面 -->
+        <div id="game-interface" class="game-interface hidden">
+            <!-- 游戏信息面板 -->
+            <div class="game-info">
+                <div class="info-group">
+                    <span class="info-label">分数:</span>
+                    <span id="score" class="info-value">0</span>
+                </div>
+                <div class="info-group">
+                    <span class="info-label">等级:</span>
+                    <span id="level" class="info-value">1</span>
+                </div>
+                <div class="info-group">
+                    <span class="info-label">食物:</span>
+                    <span id="food-count" class="info-value">0</span>
+                </div>
+                <div class="info-group">
+                    <span class="info-label">最高分:</span>
+                    <span id="high-score" class="info-value">0</span>
+                </div>
+            </div>
+
+            <!-- 游戏控制面板 -->
+            <div class="game-controls">
+                <button id="pause-btn" class="btn btn-warning">⏸️ 暂停</button>
+                <button id="restart-btn" class="btn btn-danger">🔄 重新开始</button>
+                <button id="menu-btn" class="btn btn-secondary">🏠 主菜单</button>
+            </div>
+
+            <!-- 游戏画布容器 -->
+            <div class="canvas-container">
+                <canvas id="game-canvas" width="600" height="600"></canvas>
+                <div id="game-overlay" class="game-overlay hidden">
+                    <div class="overlay-content">
+                        <h2 id="overlay-title">游戏暂停</h2>
+                        <p id="overlay-message">按空格键继续游戏</p>
+                        <div class="overlay-buttons">
+                            <button id="continue-btn" class="btn btn-primary">继续</button>
+                            <button id="quit-btn" class="btn btn-danger">退出</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 移动控制（移动端） -->
+            <div class="mobile-controls">
+                <div class="control-pad">
+                    <button id="up-btn" class="control-btn">↑</button>
+                    <div class="control-row">
+                        <button id="left-btn" class="control-btn">←</button>
+                        <button id="right-btn" class="control-btn">→</button>
+                    </div>
+                    <button id="down-btn" class="control-btn">↓</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 设置面板 -->
+        <div id="settings-panel" class="modal hidden">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>游戏设置</h3>
+                    <button id="close-settings" class="close-btn">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="setting-group">
+                        <label for="difficulty">难度设置:</label>
+                        <select id="difficulty" class="form-select">
+                            <option value="easy">简单</option>
+                            <option value="normal" selected>普通</option>
+                            <option value="hard">困难</option>
+                            <option value="expert">专家</option>
+                        </select>
+                    </div>
+                    <div class="setting-group">
+                        <label for="sound-enabled">音效:</label>
+                        <input type="checkbox" id="sound-enabled" checked>
+                    </div>
+                    <div class="setting-group">
+                        <label for="grid-size">网格大小:</label>
+                        <input type="range" id="grid-size" min="15" max="25" value="20">
+                        <span id="grid-size-value">20</span>
+                    </div>
+                    <div class="setting-group">
+                        <h4>控制键设置</h4>
+                        <div class="key-bindings">
+                            <div class="key-binding">
+                                <label>上:</label>
+                                <input type="text" id="key-up" value="ArrowUp" readonly>
+                            </div>
+                            <div class="key-binding">
+                                <label>下:</label>
+                                <input type="text" id="key-down" value="ArrowDown" readonly>
+                            </div>
+                            <div class="key-binding">
+                                <label>左:</label>
+                                <input type="text" id="key-left" value="ArrowLeft" readonly>
+                            </div>
+                            <div class="key-binding">
+                                <label>右:</label>
+                                <input type="text" id="key-right" value="ArrowRight" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="save-settings" class="btn btn-primary">保存设置</button>
+                    <button id="reset-settings" class="btn btn-secondary">重置默认</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 帮助面板 -->
+        <div id="help-panel" class="modal hidden">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>游戏帮助</h3>
+                    <button id="close-help" class="close-btn">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="help-section">
+                        <h4>游戏规则</h4>
+                        <ul>
+                            <li>控制贪吃蛇移动，吃掉食物获得分数</li>
+                            <li>蛇身会随着吃掉的食物增长</li>
+                            <li>不能撞到墙壁或自己的身体</li>
+                            <li>分数达到一定值会提升等级，速度增加</li>
+                        </ul>
+                    </div>
+                    <div class="help-section">
+                        <h4>控制方式</h4>
+                        <ul>
+                            <li>键盘: 使用方向键控制移动</li>
+                            <li>空格键: 暂停/继续游戏</li>
+                            <li>移动端: 使用屏幕下方的虚拟按键</li>
+                        </ul>
+                    </div>
+                    <div class="help-section">
+                        <h4>游戏模式</h4>
+                        <ul>
+                            <li><strong>经典模式:</strong> 传统贪吃蛇玩法</li>
+                            <li><strong>挑战模式:</strong> 包含障碍物的高难度模式</li>
+                            <li><strong>无尽模式:</strong> 没有等级限制，挑战最高分</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 音频文件 -->
+    <audio id="eat-sound" preload="auto">
+        <source src="sounds/eat.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="game-over-sound" preload="auto">
+        <source src="sounds/game-over.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="level-up-sound" preload="auto">
+        <source src="sounds/level-up.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- JavaScript 文件 -->
+    <script src="js/utils.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/audio.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/snake.js"></script>
+    <script src="js/food.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/controls.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

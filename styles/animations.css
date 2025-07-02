@@ -1,0 +1,509 @@
+/* 动画样式文件 */
+
+/* 基础动画 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideLeft {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideRight {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes zoomOut {
+    from {
+        transform: scale(1);
+        opacity: 1;
+    }
+    to {
+        transform: scale(0);
+        opacity: 0;
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    10%, 30%, 50%, 70%, 90% {
+        transform: translateX(-10px);
+    }
+    20%, 40%, 60%, 80% {
+        transform: translateX(10px);
+    }
+}
+
+@keyframes bounce {
+    0%, 20%, 53%, 80%, 100% {
+        transform: translate3d(0, 0, 0);
+    }
+    40%, 43% {
+        transform: translate3d(0, -30px, 0);
+    }
+    70% {
+        transform: translate3d(0, -15px, 0);
+    }
+    90% {
+        transform: translate3d(0, -4px, 0);
+    }
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes wiggle {
+    0%, 7% {
+        transform: rotateZ(0);
+    }
+    15% {
+        transform: rotateZ(-15deg);
+    }
+    20% {
+        transform: rotateZ(10deg);
+    }
+    25% {
+        transform: rotateZ(-10deg);
+    }
+    30% {
+        transform: rotateZ(6deg);
+    }
+    35% {
+        transform: rotateZ(-4deg);
+    }
+    40%, 100% {
+        transform: rotateZ(0);
+    }
+}
+
+/* 游戏特效动画 */
+@keyframes eatEffect {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.5);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+@keyframes scorePopup {
+    0% {
+        transform: scale(0.5) translateY(0);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.2) translateY(-20px);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1) translateY(-40px);
+        opacity: 0;
+    }
+}
+
+@keyframes levelUpEffect {
+    0% {
+        transform: scale(1);
+        filter: brightness(1) hue-rotate(0deg);
+    }
+    25% {
+        transform: scale(1.1);
+        filter: brightness(1.5) hue-rotate(90deg);
+    }
+    50% {
+        transform: scale(1.2);
+        filter: brightness(2) hue-rotate(180deg);
+    }
+    75% {
+        transform: scale(1.1);
+        filter: brightness(1.5) hue-rotate(270deg);
+    }
+    100% {
+        transform: scale(1);
+        filter: brightness(1) hue-rotate(360deg);
+    }
+}
+
+@keyframes gameOverShake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    10%, 30%, 50%, 70%, 90% {
+        transform: translateX(-5px);
+    }
+    20%, 40%, 60%, 80% {
+        transform: translateX(5px);
+    }
+}
+
+@keyframes snakeMove {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes foodSparkle {
+    0%, 100% {
+        transform: scale(1) rotate(0deg);
+        filter: brightness(1);
+    }
+    25% {
+        transform: scale(1.1) rotate(90deg);
+        filter: brightness(1.3);
+    }
+    50% {
+        transform: scale(1.2) rotate(180deg);
+        filter: brightness(1.5);
+    }
+    75% {
+        transform: scale(1.1) rotate(270deg);
+        filter: brightness(1.3);
+    }
+}
+
+@keyframes powerUpGlow {
+    0%, 100% {
+        box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+    }
+}
+
+@keyframes backgroundPulse {
+    0%, 100% {
+        background-size: 100% 100%;
+    }
+    50% {
+        background-size: 110% 110%;
+    }
+}
+
+/* 动画类 */
+.fade-in {
+    animation: fadeIn 0.5s ease-out;
+}
+
+.fade-out {
+    animation: fadeOut 0.5s ease-out;
+}
+
+.slide-up {
+    animation: slideUp 0.5s ease-out;
+}
+
+.slide-down {
+    animation: slideDown 0.5s ease-out;
+}
+
+.slide-left {
+    animation: slideLeft 0.5s ease-out;
+}
+
+.slide-right {
+    animation: slideRight 0.5s ease-out;
+}
+
+.zoom-in {
+    animation: zoomIn 0.3s ease-out;
+}
+
+.zoom-out {
+    animation: zoomOut 0.3s ease-out;
+}
+
+.pulse {
+    animation: pulse 1s infinite;
+}
+
+.shake {
+    animation: shake 0.5s ease-in-out;
+}
+
+.bounce {
+    animation: bounce 1s ease-out;
+}
+
+.rotate {
+    animation: rotate 2s linear infinite;
+}
+
+.wiggle {
+    animation: wiggle 1s ease-in-out;
+}
+
+/* 游戏状态动画 */
+.eating {
+    animation: eatEffect 0.3s ease-out;
+}
+
+.score-popup {
+    animation: scorePopup 1s ease-out forwards;
+}
+
+.level-up {
+    animation: levelUpEffect 1s ease-out;
+}
+
+.game-over-shake {
+    animation: gameOverShake 0.5s ease-in-out 3;
+}
+
+.snake-moving {
+    animation: snakeMove 0.2s ease-in-out;
+}
+
+.food-sparkle {
+    animation: foodSparkle 2s ease-in-out infinite;
+}
+
+.power-up-glow {
+    animation: powerUpGlow 1s ease-in-out infinite;
+}
+
+.background-pulse {
+    animation: backgroundPulse 4s ease-in-out infinite;
+}
+
+/* 粒子效果 */
+.particle-explosion {
+    position: absolute;
+    pointer-events: none;
+}
+
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: radial-gradient(circle, #fff, #667eea);
+    border-radius: 50%;
+    animation: particleMove 1s ease-out forwards;
+}
+
+@keyframes particleMove {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.5) translateY(-30px);
+    }
+}
+
+/* 彩虹效果 */
+.rainbow-text {
+    background: linear-gradient(45deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: rainbow 3s ease-in-out infinite;
+}
+
+@keyframes rainbow {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+/* 悬浮效果 */
+.floating {
+    animation: floating 3s ease-in-out infinite;
+}
+
+@keyframes floating {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* 打字机效果 */
+.typewriter {
+    overflow: hidden;
+    border-right: 2px solid #667eea;
+    white-space: nowrap;
+    animation: typewriter 2s steps(40, end), blink-caret 1s step-end infinite;
+}
+
+@keyframes typewriter {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes blink-caret {
+    from, to {
+        border-color: transparent;
+    }
+    50% {
+        border-color: #667eea;
+    }
+}
+
+/* 延迟动画 */
+.delay-1 {
+    animation-delay: 0.1s;
+}
+
+.delay-2 {
+    animation-delay: 0.2s;
+}
+
+.delay-3 {
+    animation-delay: 0.3s;
+}
+
+.delay-4 {
+    animation-delay: 0.4s;
+}
+
+.delay-5 {
+    animation-delay: 0.5s;
+}
+
+/* 无限动画 */
+.infinite {
+    animation-iteration-count: infinite;
+}
+
+/* 动画播放控制 */
+.paused {
+    animation-play-state: paused;
+}
+
+.running {
+    animation-play-state: running;
+}
+
+/* 响应式动画调整 */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+@media (max-width: 768px) {
+    /* 在移动设备上减少动画强度 */
+    .pulse {
+        animation-duration: 1.5s;
+    }
+    
+    .floating {
+        animation-duration: 4s;
+    }
+    
+    .rainbow-text {
+        animation-duration: 4s;
+    }
+    
+    .food-sparkle {
+        animation-duration: 3s;
+    }
+}
